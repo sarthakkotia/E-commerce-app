@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ecommerce_app/common/widgets/bottom_bar.dart';
 import 'package:ecommerce_app/constants/error_handling.dart';
 import 'package:ecommerce_app/constants/global_variables.dart';
 import 'package:ecommerce_app/constants/utils.dart';
@@ -86,7 +87,7 @@ class AuthService {
           // state persistance using provider
           // TODO: under the predicate work here
           Navigator.pushNamedAndRemoveUntil(
-              context, HomeScreen.routeName, (route) => false);
+              context, BottomBar.routeName, (route) => false);
           // showSnackBar(context,
           //     "Account Created! Please login with the same credentials");
         },
