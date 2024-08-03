@@ -32,12 +32,20 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void signupUser() {
-    print("inside signupUser");
+    // print("inside signupUser");
     authService.signupUser(
         context: context,
         email: _emailController.text,
         password: _passwordController.text,
         name: _nameController.text);
+  }
+
+  void signinUser() {
+    authService.signinUser(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
   }
 
   @override
@@ -101,9 +109,9 @@ class _AuthScreenState extends State<AuthScreen> {
                         ),
                         CustomButton(
                           onTap: () {
-                            print("tttttt");
+                            // print("tttttt");
                             if (_signupFormKey.currentState!.validate()) {
-                              print("test inside");
+                              // print("test inside");
                               signupUser();
                             }
                           },
@@ -134,7 +142,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 Container(
                   color: GlobalVariables.backgroundColor,
                   child: Form(
-                    key: _signupFormKey,
+                    key: _signinFormKey,
                     child: Column(
                       children: [
                         CustomTextfield(
@@ -148,7 +156,13 @@ class _AuthScreenState extends State<AuthScreen> {
                         const SizedBox(
                           height: 8,
                         ),
-                        CustomButton(onTap: () {}, text: "Sign In")
+                        CustomButton(
+                            onTap: () {
+                              if (_signinFormKey.currentState!.validate()) {
+                                signinUser();
+                              }
+                            },
+                            text: "Sign In")
                       ],
                     ),
                   ),

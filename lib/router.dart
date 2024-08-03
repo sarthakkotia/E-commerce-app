@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/features/auth/screens/auth_screen.dart';
+import 'package:ecommerce_app/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -10,6 +11,13 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
           return const AuthScreen();
         },
       );
+    case HomeScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) {
+          return const HomeScreen();
+        },
+      );
     default:
       return MaterialPageRoute(
         settings: routeSettings,
@@ -19,6 +27,5 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
           ),
         ),
       );
-      
   }
 }
