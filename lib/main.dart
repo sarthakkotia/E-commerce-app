@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/common/widgets/bottom_bar.dart';
 import 'package:ecommerce_app/constants/global_variables.dart';
+import 'package:ecommerce_app/features/admin/screens/admin_screen.dart';
 import 'package:ecommerce_app/features/auth/screens/auth_screen.dart';
 import 'package:ecommerce_app/features/auth/services/auth_service.dart';
 import 'package:ecommerce_app/providers/user_provider.dart';
@@ -39,6 +40,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'E-Commerce App',
       theme: ThemeData(
         useMaterial3: false,
@@ -54,7 +56,9 @@ class _MyAppState extends State<MyApp> {
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.token.isEmpty
           ? const AuthScreen()
-          : const BottomBar(),
+          : Provider.of<UserProvider>(context).user.type == "User"
+              ? const BottomBar()
+              : const AdminScreen(),
     );
   }
 }

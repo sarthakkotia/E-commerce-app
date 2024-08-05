@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 // from files
 const authRouter = require("./routes/auth.js");
+const adminRouter = require('./routes/admin.js');
 
 
 // Initalization
@@ -13,6 +14,7 @@ const DB = "mongodb+srv://admin:admin@cluster0.vgqvht2.mongodb.net/?retryWrites=
 // middleware
 app.use(express.json())
 app.use(authRouter);
+app.use(adminRouter);
 
 //connections
 mongoose.connect(DB).then(() => {
