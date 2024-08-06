@@ -91,4 +91,38 @@ class AdminServices {
     }
     return productList;
   }
+
+  void deleteProduct(
+      {required BuildContext context,
+      required Product product,
+      required VoidCallback onSuccess}) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    // the onSuccess will let us call set state from this function
+    // try {
+    // http.Response res = await http
+    //     .post(Uri.parse("$uri/admin/delete-product"), headers: <String, String>{
+    //   "Content-Type": "application/json; charset=UTF-8",
+    //   "x-auth-token": userProvider.user.token
+    // }, body: {
+    //   "id": product.id
+    // });
+    // logger.w(product.id);
+    http.Response res = await http.post(Uri.parse("$uri/admin/delete-product"),
+        headers: <String, String>{
+          "Content-Type": "application/json; charset=UTF-8",
+          "x-auth-token": userProvider.user.token,
+        },
+        body: jsonEncode({"id": "${product.id}"}));
+    // logger.w("${res.body}");
+    httpErrorHandler(
+        response: res,
+        context: context,
+        onSuccess: () {
+          onSuccess();
+        });
+    // }
+    // } catch (e) {
+    //   showSnackBar(context, e.toString());
+    // }
+  }
 }

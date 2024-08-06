@@ -50,7 +50,7 @@ class Product {
       images: dummyimages,
       category: map['category'] as String,
       price: double.parse("${map["price"]}"),
-      id: map['id'] != null ? map['id'] as String : null,
+      id: map['_id'] != null ? map['_id'] as String : null,
     );
   }
 
