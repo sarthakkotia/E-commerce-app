@@ -1,5 +1,5 @@
+import 'dart:convert';
 import 'dart:io';
-
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:ecommerce_app/constants/error_handling.dart';
 import 'package:ecommerce_app/constants/global_variables.dart';
@@ -16,7 +16,7 @@ class AdminServices {
     required String name,
     required String description,
     required double price,
-    required double quantity,
+    required int quantity,
     required String category,
     required List<File> images,
   }) async {
@@ -59,5 +59,36 @@ class AdminServices {
     } catch (e) {
       showSnackBar(context, e.toString());
     }
+  }
+
+  Future<List<Product>> fetchAllProducts(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<Product> productList = [];
+    try {
+      http.Response res = await http.get(
+        Uri.parse("$uri/admin/get-products"),
+        headers: <String, String>{
+          "Content-Type": "application/json; charset=UTF-8",
+          "x-auth-token": userProvider.user.token
+        },
+      );
+      httpErrorHandler(
+          response: res,
+          context: context,
+          onSuccess: () {
+            for (int i = 0; i < jsonDecode(res.body)["products"].length; i++) {
+              productList.add(
+                Product.fromJson(
+                  jsonEncode(
+                    jsonDecode(res.body)["products"][i],
+                  ),
+                ),
+              );
+            }
+          });
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+    return productList;
   }
 }

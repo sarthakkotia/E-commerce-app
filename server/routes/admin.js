@@ -21,4 +21,15 @@ adminRouter.post("/admin/add-product", admin, async (req, res)=>{
     }
 })
 
+adminRouter.get("/admin/get-products",admin, async (req, res)=>{
+    try {   
+        const products = await Product.find({});
+        // finds the document for a particular field but if no argument then would return all
+        // console.log(products);
+        res.json({products})
+    } catch (error) {
+        res.status(500).json({error: e.message})
+    }
+})
+
 module.exports = adminRouter

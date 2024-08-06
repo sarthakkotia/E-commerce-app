@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert' show json;
 import 'dart:convert';
 
 class Product {
   final String name;
   final String description;
-  final double quantity;
+  final int quantity;
   final List<String> images;
   final String category;
   final double price;
@@ -32,14 +33,24 @@ class Product {
   }
 
   factory Product.fromMap(Map<String, dynamic> map) {
+    // int pquantity = map['quantity'] as int;
+    List<dynamic> imgs = map["images"];
+    List<String> dummyimages = [];
+    imgs.every(
+      (element) {
+        dummyimages.add(element);
+        return true;
+      },
+    );
+
     return Product(
       name: map['name'] as String,
       description: map['description'] as String,
-      quantity: map['quantity'] as double,
-      images: List<String>.from((map['images'] as List<String>)),
+      quantity: map['quantity'] as int,
+      images: dummyimages,
       category: map['category'] as String,
-      price: map['price'] as double,
-      id: map['_id'] != null ? map['id'] as String : null,
+      price: double.parse("${map["price"]}"),
+      id: map['id'] != null ? map['id'] as String : null,
     );
   }
 
