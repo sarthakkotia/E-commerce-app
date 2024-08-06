@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 // from files
 const authRouter = require("./routes/auth.js");
 const adminRouter = require('./routes/admin.js');
+const productRouter = require('./routes/product.js');
 
 
 // Initalization
@@ -15,6 +16,7 @@ const DB = "mongodb+srv://admin:admin@cluster0.vgqvht2.mongodb.net/?retryWrites=
 app.use(express.json())
 app.use(authRouter);
 app.use(adminRouter);
+app.use(productRouter);
 
 //connections
 mongoose.connect(DB).then(() => {
