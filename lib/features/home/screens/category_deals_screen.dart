@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/constants/global_variables.dart';
 import 'package:ecommerce_app/features/home/services/home_services.dart';
+import 'package:ecommerce_app/features/product_details/screens/product_details_screen.dart';
 import 'package:ecommerce_app/models/product.dart';
 import 'package:flutter/material.dart';
 
@@ -76,31 +77,38 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
                     ),
                     itemBuilder: (context, index) {
                       final product = productsList![index];
-                      return Column(
-                        children: [
-                          SizedBox(
-                            height: 130,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: Colors.black, width: 0.5),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Image.network(product.images[0]),
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, ProductDetailsScreen.routeName,
+                              arguments: product);
+                        },
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 130,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.black, width: 0.5),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Image.network(product.images[0]),
+                                ),
                               ),
                             ),
-                          ),
-                          Container(
-                            alignment: Alignment.topLeft,
-                            padding: const EdgeInsets.only(top: 5, right: 15),
-                            child: Text(
-                              product.name,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          )
-                        ],
+                            Container(
+                              alignment: Alignment.topLeft,
+                              padding: const EdgeInsets.only(top: 5, right: 15),
+                              child: Text(
+                                product.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            )
+                          ],
+                        ),
                       );
                     },
                   ),
