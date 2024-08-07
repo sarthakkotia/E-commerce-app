@@ -22,5 +22,30 @@ productRouter.get("/api/products", auth, async (req, res)=>{
     }
 })
 
+//api/products/search/iphone
+// /api/products/search/:name
+// /api/products/search/:name/:na
+
+productRouter.get("/api/products/search/:name", auth, async (req, res)=>{
+    try {   
+        // user req.query.category for diff queries access 
+        // for api/products:category=Essentials use req.params
+        const products = await Product.find({
+            name: {
+                // for fuzzy search
+                // i for case insensitivity
+                //alternate approach could have been if we pass a exactly correct name
+                $regex: req.params.name, $options: "i"
+            }
+        });
+        // finds the document for a particular field but if no argument then would return all
+        // console.log(products);
+        res.json({products})
+        
+    } catch (error) {
+        
+        res.status(500).json({error: e.message})
+    }
+})
 
 module.exports = productRouter
