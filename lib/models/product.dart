@@ -2,6 +2,11 @@
 import 'dart:convert' show json;
 import 'dart:convert';
 
+import 'package:ecommerce_app/models/rating.dart';
+import 'package:logger/logger.dart';
+
+var logger = Logger();
+
 class Product {
   final String name;
   final String description;
@@ -10,6 +15,7 @@ class Product {
   final String category;
   final double price;
   final String? id;
+  final List<Rating>? rating;
 
   Product(
       {required this.name,
@@ -18,7 +24,8 @@ class Product {
       required this.images,
       required this.category,
       required this.price,
-      this.id});
+      this.id,
+      this.rating});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -29,11 +36,11 @@ class Product {
       'category': category,
       'price': price,
       'id': id,
+      'rating': rating
     };
   }
 
   factory Product.fromMap(Map<String, dynamic> map) {
-    // int pquantity = map['quantity'] as int;
     List<dynamic> imgs = map["images"];
     List<String> dummyimages = [];
     imgs.every(
@@ -42,16 +49,22 @@ class Product {
         return true;
       },
     );
-
+    List<dynamic> ratings = map["ratings"];
     return Product(
-      name: map['name'] as String,
-      description: map['description'] as String,
-      quantity: map['quantity'] as int,
-      images: dummyimages,
-      category: map['category'] as String,
-      price: double.parse("${map["price"]}"),
-      id: map['_id'] != null ? map['_id'] as String : null,
-    );
+        name: map['name'] as String,
+        description: map['description'] as String,
+        quantity: map['quantity'] as int,
+        images: dummyimages,
+        category: map['category'] as String,
+        price: double.parse("${map["price"]}"),
+        id: map['_id'] != null ? map['_id'] as String : null,
+        rating: ratings.isNotEmpty
+            ? List<Rating>.from(
+                map["ratings"]?.map(
+                  (x) => Rating.fromMap(x),
+                ),
+              )
+            : null);
   }
 
   String toJson() => json.encode(toMap());
