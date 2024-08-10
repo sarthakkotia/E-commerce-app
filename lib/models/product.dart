@@ -41,6 +41,7 @@ class Product {
   }
 
   factory Product.fromMap(Map<String, dynamic> map) {
+    logger.w(map);
     List<dynamic> imgs = map["images"];
     List<String> dummyimages = [];
     imgs.every(
@@ -58,7 +59,7 @@ class Product {
         category: map['category'] as String,
         price: double.parse("${map["price"]}"),
         id: map['_id'] != null ? map['_id'] as String : null,
-        rating: ratings.isNotEmpty
+        rating: ratings != null
             ? List<Rating>.from(
                 map["ratings"]?.map(
                   (x) => Rating.fromMap(x),

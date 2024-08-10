@@ -118,9 +118,9 @@ productRouter.get("/api/deal-of-day", auth, async (req, res) => {
                 aSum += a.ratings[i];
             }
             for(let i=0; i<b.ratings.length; i++){
-                aSum += b.ratings[i];
+                bSUm += b.ratings[i];
             }
-            return aSum < bSUm;
+            return aSum > bSUm;
         })
         console.log(sortedRatings);
         res.json({
@@ -130,7 +130,7 @@ productRouter.get("/api/deal-of-day", auth, async (req, res) => {
 
 
     } catch (error) {
-        res.status(500).json({error: e.message})
+        res.status(500).json({error: error.message})
     }
 })
 

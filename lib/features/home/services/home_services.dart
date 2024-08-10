@@ -62,13 +62,13 @@ class HomeServices {
           "x-auth-token": userProvider.user.token
         },
       );
-      logger.w(jsonDecode(res.body));
+      // logger.w(jsonEncode(jsonDecode(res.body)));
 
       httpErrorHandler(
           response: res,
           context: context,
           onSuccess: () {
-            p = Product.fromJson(jsonDecode(res.body)["product"]);
+            p = Product.fromJson(jsonEncode(jsonDecode(res.body)["product"]));
             // p = Product.fromJson(res.body);
           });
     } catch (e) {
