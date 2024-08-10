@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const {productSchema} = require('./product.js');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -35,7 +36,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "user",
     },
-    //cart
+    cart: [
+        {
+            product: productSchema,
+            quantity: {
+                type: Number,
+                required: true
+            },
+        }
+    ],
 }, {timestamps: true})
 
 const User = mongoose.model("User", userSchema);
