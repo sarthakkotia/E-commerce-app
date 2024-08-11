@@ -22,14 +22,14 @@ class AuthService {
   }) async {
     try {
       User user = User(
-        id: "",
-        email: email,
-        name: name,
-        password: password,
-        address: "",
-        type: "",
-        token: "",
-      );
+          id: "",
+          email: email,
+          name: name,
+          password: password,
+          address: "",
+          type: "",
+          token: "",
+          cart: []);
       // print("user created");
       Uri url = Uri.parse("$uri/api/signup");
       // print("url is $url");
