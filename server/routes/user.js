@@ -55,4 +55,48 @@ userRouter.post("/api/add-to-cart", auth, async (req, res)=>{
     }
 })
 
+//colon for params
+userRouter.delete("/api/remove-from-cart/:id", auth, async (req, res)=>{
+    try {
+        const {id} = req.params;
+        // or req.params.id
+        const product = await Product.findById(id)
+        if(!product){
+            res.status(404).json({message: "product not found"})
+        }
+        const user = await User.findById(req.user);
+        // console.log("found user")
+        // console.log(user.cart)
+        const cart = user.cart
+        let mutableCart = cart
+        // console.log(mutableCart)
+        for(let i=0; i<mutableCart.length; i++){
+            if(mutableCart[i].product._id.equals(product._id)){
+                mutableCart[i].quantity--;
+                // wll use splice to delete the product
+                if(mutableCart[i].quantity == 0){
+                    mutableCart.splice(i,1);
+                }
+                // console.log(mutableCart)
+                break;
+            }
+        }
+        // console.log("cart added")
+        // console.log(req.user)
+        // console.log(mutableCart)
+        // console.log(req.user)
+        const changed = await User.findByIdAndUpdate(
+            req.user, {
+                $set: {cart: mutableCart}
+            },{
+                new: true
+            }
+        )
+        res.json({changed})
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }
+})
+
+
 module.exports = userRouter

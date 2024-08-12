@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/constants/global_variables.dart';
 import 'package:ecommerce_app/features/account/screens/account_screen.dart';
+import 'package:ecommerce_app/features/cart/screens/cart_screen.dart';
 import 'package:ecommerce_app/features/home/screens/home_screen.dart';
 import 'package:ecommerce_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +26,7 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> pages = [
     const HomeScreen(),
     const AccountScreen(),
-    const Center(
-      child: Text("cart page"),
-    )
+    const CartScreen()
   ];
 
   void updatePage(int page) {
@@ -40,7 +39,7 @@ class _BottomBarState extends State<BottomBar> {
   Widget build(BuildContext context) {
     // context.watch is a short syntax for provider
     final userCartLength = context.watch<UserProvider>().user.cart.length;
-    final user = context.watch<UserProvider>().user;
+    // final user = context.watch<UserProvider>().user;
     // logger.w(user.cart);
 
     return Scaffold(
