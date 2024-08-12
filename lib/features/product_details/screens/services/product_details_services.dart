@@ -8,7 +8,10 @@ import 'package:ecommerce_app/models/user.dart';
 import 'package:ecommerce_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
+
+var logger = Logger();
 
 class ProductDetailsServices {
   void addToCart({
@@ -28,13 +31,14 @@ class ProductDetailsServices {
           context: context,
           onSuccess: () {
             // instead of updating the whole whole which could cause problems with provider we used copyWith constructor
-            User user =
-                userProvider.user.copyWith(cart: jsonDecode(res.body)['cart']);
+            // logger.w(jsonDecode(res.body)['changed']['cart']);
+            User user = userProvider.user
+                .copyWith(cart: jsonDecode(res.body)['changed']['cart']);
             // now set user to a different one
             userProvider.setUserFromModel(user);
           });
     } catch (e) {
-      logger.w(e.toString());
+      // logger.w(e.toString());
       showSnackBar(context, e.toString());
     }
   }
@@ -54,7 +58,7 @@ class ProductDetailsServices {
               body: jsonEncode({"id": product.id, "rating": rating}));
       httpErrorHandler(response: res, context: context, onSuccess: () {});
     } catch (e) {
-      logger.w(e.toString());
+      // logger.w(e.toString());
       showSnackBar(context, e.toString());
     }
   }

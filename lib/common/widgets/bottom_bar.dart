@@ -4,7 +4,10 @@ import 'package:ecommerce_app/features/home/screens/home_screen.dart';
 import 'package:ecommerce_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
+
+var logger = Logger();
 
 class BottomBar extends StatefulWidget {
   static const String routeName = "/actual-home";
@@ -37,6 +40,9 @@ class _BottomBarState extends State<BottomBar> {
   Widget build(BuildContext context) {
     // context.watch is a short syntax for provider
     final userCartLength = context.watch<UserProvider>().user.cart.length;
+    final user = context.watch<UserProvider>().user;
+    // logger.w(user.cart);
+
     return Scaffold(
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(

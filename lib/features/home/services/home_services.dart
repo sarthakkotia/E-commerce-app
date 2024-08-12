@@ -7,10 +7,10 @@ import 'package:ecommerce_app/models/product.dart';
 import 'package:ecommerce_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:logger/logger.dart';
+// import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
-var logger = Logger();
+// var logger = Logger();
 
 class HomeServices {
   Future<List<Product>> fetchCategoryProducts(

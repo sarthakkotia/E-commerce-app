@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:logger/logger.dart';
+// import 'package:logger/logger.dart';
 
-var logger = Logger();
+// var logger = Logger();
 
 class Rating {
   final String userId;

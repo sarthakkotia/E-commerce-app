@@ -3,9 +3,9 @@ import 'dart:convert' show json;
 import 'dart:convert';
 
 import 'package:ecommerce_app/models/rating.dart';
-import 'package:logger/logger.dart';
+// import 'package:logger/logger.dart';
 
-var logger = Logger();
+// var logger = Logger();
 
 class Product {
   final String name;
@@ -41,7 +41,7 @@ class Product {
   }
 
   factory Product.fromMap(Map<String, dynamic> map) {
-    logger.w(map);
+    // logger.w(map);
     List<dynamic> imgs = map["images"];
     List<String> dummyimages = [];
     imgs.every(

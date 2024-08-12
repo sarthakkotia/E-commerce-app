@@ -8,7 +8,7 @@ import 'package:ecommerce_app/models/product.dart';
 import 'package:ecommerce_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:logger/logger.dart';
+// import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
@@ -28,11 +28,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       ProductDetailsServices();
   double avgRating = 0;
   double myRating = 0;
-  var logger = Logger();
+  // var logger = Logger();
   @override
   void initState() {
     super.initState();
-    logger.w("${widget.product.rating}");
+    // logger.w("${widget.product.rating}");
     double totalRating = 0;
     if (widget.product.rating != null) {
       for (int i = 0; i < widget.product.rating!.length; i++) {
