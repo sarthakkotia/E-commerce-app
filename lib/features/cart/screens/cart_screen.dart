@@ -1,9 +1,11 @@
 import 'package:ecommerce_app/common/widgets/custom_button.dart';
 import 'package:ecommerce_app/constants/global_variables.dart';
+import 'package:ecommerce_app/features/address/screens/address_screen.dart';
 import 'package:ecommerce_app/features/cart/widgets/cart_product.dart';
 import 'package:ecommerce_app/features/cart/widgets/cart_subtotal.dart';
 import 'package:ecommerce_app/features/home/widgets/address_box.dart';
 import 'package:ecommerce_app/features/search/screens/search_screen.dart';
+import 'package:ecommerce_app/models/user.dart';
 import 'package:ecommerce_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +24,19 @@ class _CartScreenState extends State<CartScreen> {
       SearchScreen.routeName,
       arguments: query,
     );
+  }
+
+  void navigateToAddress(User user) {
+    // var logger = Logger();
+    // logger.w(user.cart);
+    int sum = 0;
+    user.cart.map((e) {
+      // logger.w(e);
+      sum += e['quantity'] * e['product']['price'] as int;
+      // logger.w(sum);
+    }).toList();
+    Navigator.pushNamed(context, AddressScreen.routeName,
+        arguments: sum.toString());
   }
 
   @override
@@ -107,7 +122,7 @@ class _CartScreenState extends State<CartScreen> {
               padding: const EdgeInsets.all(8.0),
               child: CustomButton(
                 color: Colors.yellow[600],
-                onTap: () {},
+                onTap: () => navigateToAddress(user),
                 text: "Proceed To Buy (${user.cart.length} items)",
               ),
             ),

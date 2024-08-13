@@ -1,5 +1,4 @@
 import 'package:ecommerce_app/features/cart/services/cart_services.dart';
-import 'package:ecommerce_app/features/product_details/screens/product_details_screen.dart';
 import 'package:ecommerce_app/features/product_details/screens/services/product_details_services.dart';
 import 'package:ecommerce_app/models/product.dart';
 import 'package:ecommerce_app/providers/user_provider.dart';
