@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/constants/global_variables.dart';
+import 'package:ecommerce_app/features/account/services/account_services.dart';
 import 'package:ecommerce_app/features/account/widgets/product.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
+  final AccountServices accountServices = AccountServices();
   //temporary list
   List list = [
     {
@@ -29,6 +31,11 @@ class _OrdersState extends State<Orders> {
           "https://images.pexels.com/photos/27302823/pexels-photo-27302823/free-photo-of-blueberries-on-and-near-plate.jpeg",
     },
   ];
+  @override
+  void initState() {
+    accountServices.fetchMyOrders(context: context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
