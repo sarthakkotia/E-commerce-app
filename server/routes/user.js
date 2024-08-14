@@ -2,6 +2,7 @@ const express = require("express");
 const auth = require("../middlewares/auth.js");
 const { Product } = require("../models/product.js");
 const User = require("../models/user");
+const Order = require("../models/order.js");
 const userRouter = express.Router();
 
 
@@ -93,6 +94,66 @@ userRouter.delete("/api/remove-from-cart/:id", auth, async (req, res)=>{
             }
         )
         res.json({changed})
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }
+})
+
+userRouter.post("/api/save-user-address", auth, async (req, res) => {
+    try {
+        const {address} = req.body;
+        if(!address){
+            res.status(400).json({message: "User address not found"})
+        }
+        const user = await User.findByIdAndUpdate(
+            req.user, {
+                $set: {address}
+            },{
+                new: true
+            }
+        )
+        res.json(user)
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }
+})
+
+
+userRouter.post("/api/order", auth, async (req, res) => {
+    try {
+        const {cart, totalPrice, address} = req.body;
+        let products = []
+        for(let i=0; i<cart.length; i++){
+            let product = await Product.findById(cart[i].product._id);
+            //qty check
+            if(product.quantity >= cart[i].quantity){
+                product.quantity -= cart[i].quantity;
+                products.push({product, quantity: cart[i].quantity});
+                await Product.findByIdAndUpdate(cart[i].product._id, {
+                    quantity: product.quantity
+                });    
+            }else{
+                return res.status(400).json({message: `${product.name} is out of stock` })
+            }
+        }
+
+        let user = await User.findById(req.user);
+        user.cart = []
+        user = await User.findByIdAndUpdate(req.user, {
+            cart: user.cart
+        }, {
+            new: true
+        })
+
+        const order = Order.create({
+            products,
+            totalPrice,
+            address,
+            userId: req.user,
+            orderedAt: new Date().getTime(),
+        })
+
+        res.json(order);
     } catch (error) {
         res.status(500).json({error: error.message})
     }

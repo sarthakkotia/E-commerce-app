@@ -7,6 +7,7 @@ import 'package:ecommerce_app/constants/utils.dart';
 import 'package:ecommerce_app/features/address/services/address_services.dart';
 import 'package:ecommerce_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
 
@@ -52,19 +53,33 @@ class _AddressScreenState extends State<AddressScreen> {
 
   //these funcitons are called on success
   void onGPayResult(res) {
-    if (Provider.of<UserProvider>(context).user.address.isEmpty) {
+    if (Provider.of<UserProvider>(context, listen: false)
+        .user
+        .address
+        .isEmpty) {
       //store the address
       addressServices.saveUserAddress(
           context: context, address: addressToBeUsed);
     }
+    addressServices.placeOrder(
+        context: context,
+        address: addressToBeUsed,
+        totalSum: double.parse(widget.totalAmount));
   }
 
   void onApplePayResult(res) {
-    if (Provider.of<UserProvider>(context).user.address.isEmpty) {
+    if (Provider.of<UserProvider>(context, listen: false)
+        .user
+        .address
+        .isEmpty) {
       //store the address
       addressServices.saveUserAddress(
           context: context, address: addressToBeUsed);
     }
+    addressServices.placeOrder(
+        context: context,
+        address: addressToBeUsed,
+        totalSum: double.parse(widget.totalAmount));
   }
 
   // we need to check address before moving onto the payment so do validation
