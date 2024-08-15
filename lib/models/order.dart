@@ -2,6 +2,9 @@
 import 'dart:convert';
 
 import 'package:ecommerce_app/models/product.dart';
+import 'package:logger/logger.dart';
+
+var logger = Logger();
 
 class Order {
   final String id;
@@ -35,22 +38,30 @@ class Order {
 
   factory Order.fromMap(Map<String, dynamic> map) {
     return Order(
-      id: map['id'] as String,
-      products: List<Product>.from(
-        (map['products'] as List<int>).map<Product>(
-          (x) => Product.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
-      quantity: List<int>.from((map['quantity'] as List<int>)),
+      id: map['_id'] as String,
       address: map['address'] as String,
       userId: map['userId'] as String,
       orderedAt: map['orderedAt'] as int,
       status: map['status'] as int,
+      quantity: List<int>.from(
+        map['products']?.map(
+          (e) => e['quantity'],
+        ),
+      ),
+      products: List<Product>.from(
+        map['products']?.map(
+          (e) => Product.fromMap(
+            e['product'],
+          ),
+        ),
+      ),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Order.fromJson(String source) =>
-      Order.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Order.fromJson(String source) {
+    // logger.w(source);
+    return Order.fromMap(json.decode(source) as Map<String, dynamic>);
+  }
 }

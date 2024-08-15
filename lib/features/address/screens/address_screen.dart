@@ -82,6 +82,21 @@ class _AddressScreenState extends State<AddressScreen> {
         totalSum: double.parse(widget.totalAmount));
   }
 
+  void TestonGPayResult() {
+    if (Provider.of<UserProvider>(context, listen: false)
+        .user
+        .address
+        .isEmpty) {
+      //store the address
+      addressServices.saveUserAddress(
+          context: context, address: addressToBeUsed);
+    }
+    addressServices.placeOrder(
+        context: context,
+        address: addressToBeUsed,
+        totalSum: double.parse(widget.totalAmount));
+  }
+
   // we need to check address before moving onto the payment so do validation
   void payPressed(String address) {
     addressToBeUsed = "";
@@ -103,6 +118,7 @@ class _AddressScreenState extends State<AddressScreen> {
     } else {
       showSnackBar(context, "Error");
     }
+    TestonGPayResult();
   }
 
   @override

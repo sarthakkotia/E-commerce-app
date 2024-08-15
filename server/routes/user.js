@@ -145,14 +145,14 @@ userRouter.post("/api/order", auth, async (req, res) => {
             new: true
         })
 
-        const order = Order.create({
+        const order = await Order.create({
             products,
             totalPrice,
             address,
             userId: req.user,
             orderedAt: new Date().getTime(),
         })
-
+        // console.log(order)
         res.json(order);
     } catch (error) {
         res.status(500).json({error: error.message})
@@ -164,7 +164,7 @@ userRouter.get("/api/orders/me", auth, async (req, res) => {
         const orders = await Order.find({
             userId: req.user
         })
-        // console.log(products);
+        // console.log(orders[0]);
         res.json(orders)
     } catch (error) {
         res.status(500).json({error: error.message})

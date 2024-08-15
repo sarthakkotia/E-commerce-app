@@ -32,16 +32,16 @@ try {
 authRouter.post("/api/signin", async (req, res) => {
     try {
         const {email, password} = req.body;
-        console.log(req.body);
+        // console.log(req.body);
         const user = await User.findOne({email});
         if(!user){
             return res.status(404).json({message: "User Not Found"});
         }
-        console.log(email);
-        console.log(user.password);
+        // console.log(email);
+        // console.log(user.password);
         const existingPassword = user.password;
         const isPasswordValid = await bcryptjs.compare(password, existingPassword);
-        console.log(isPasswordValid);
+        // console.log(isPasswordValid);
         if(!isPasswordValid){
             return res.status(404).json({message: "Password Incorrect"});
         }

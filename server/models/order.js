@@ -26,7 +26,7 @@ const orderSchema = new mongoose.Schema({
     },
     status: {
         type: Number,
-        deafult: 0
+        default: 0
     },
     orderedAt: {
         type: Number,

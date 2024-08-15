@@ -122,7 +122,7 @@ productRouter.get("/api/deal-of-day", auth, async (req, res) => {
             }
             return aSum > bSUm;
         })
-        console.log(sortedRatings);
+        // console.log(sortedRatings);
         res.json({
             product: sortedRatings[0]
         });

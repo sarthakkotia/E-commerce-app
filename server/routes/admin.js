@@ -41,9 +41,9 @@ adminRouter.post("/admin/delete-product", admin, async (req, res)=>{
     try {
         // console.log("came into the function")
         const {id} = req.body;
-        console.log(id)
+        // console.log(id)
         const response = await Product.findByIdAndDelete(id);
-        console.log(response)
+        // console.log(response)
         if(!response)
             res.status(500).json({message: "An Error Occured, please try again"});
         res.json({message: "Product delted successfully"})
