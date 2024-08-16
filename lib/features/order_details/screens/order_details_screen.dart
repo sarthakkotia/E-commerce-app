@@ -1,10 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ecommerce_app/common/widgets/custom_button.dart';
 import 'package:ecommerce_app/constants/global_variables.dart';
+import 'package:ecommerce_app/features/admin/services/admin_services.dart';
 import 'package:ecommerce_app/features/search/screens/search_screen.dart';
+import 'package:ecommerce_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ecommerce_app/models/order.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class OrderDetailsScreen extends StatefulWidget {
   static const String routeName = "/order-details";
@@ -19,12 +23,27 @@ class OrderDetailsScreen extends StatefulWidget {
 }
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
+  final AdminServices adminServices = AdminServices();
   int currentStep = 0;
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(
       context,
       SearchScreen.routeName,
       arguments: query,
+    );
+  }
+
+  // for admin only
+  void changeOrderStatus(int status) {
+    adminServices.changeStatus(
+      context: context,
+      order: widget.order,
+      status: status + 1,
+      onSuccess: () {
+        setState(() {
+          currentStep++;
+        });
+      },
     );
   }
 
@@ -36,6 +55,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).user;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -209,6 +229,11 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 child: Stepper(
                   currentStep: currentStep,
                   controlsBuilder: (context, details) {
+                    if (user.type == "admin") {
+                      return CustomButton(
+                          onTap: () => changeOrderStatus(details.currentStep),
+                          text: "Done");
+                    }
                     return const SizedBox();
                   },
                   steps: [

@@ -2,6 +2,7 @@ const express = require("express")
 const adminRouter = express.Router();
 const admin = require("../middlewares/admin");
 const {Product} = require("../models/product");
+const {Order} = require("../models/order");
 const { default: mongoose } = require("mongoose");
 
 // Creating an admin middleware
@@ -51,6 +52,35 @@ adminRouter.post("/admin/delete-product", admin, async (req, res)=>{
 
     } catch (error) {
         // console.log("error came")
+        res.status(500).json({error: error.message})
+    }
+})
+
+adminRouter.get("/admin/get-orders", admin, async (_, res) => {
+    try {
+        const orders = await Order.find({})
+        res.json({orders})
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }
+})
+
+adminRouter.post("/admin/change-order-status", admin, async (req, res) => {
+    try {
+        const {id, status} = req.body
+        const order = await Order.findByIdAndUpdate(
+            id,
+            {
+                $set: {
+                    status: status
+                }
+            }, {
+                new: true
+            }
+        )
+        console.log(order);
+        res.json({order});
+    } catch (error) {
         res.status(500).json({error: error.message})
     }
 })
