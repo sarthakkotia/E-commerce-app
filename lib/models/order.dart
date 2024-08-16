@@ -14,6 +14,7 @@ class Order {
   final String userId;
   final int orderedAt;
   final int status;
+  final double totalPrice;
 
   Order(
       {required this.id,
@@ -22,7 +23,8 @@ class Order {
       required this.address,
       required this.userId,
       required this.orderedAt,
-      required this.status});
+      required this.status,
+      required this.totalPrice});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -33,6 +35,7 @@ class Order {
       'userId': userId,
       'orderedAt': orderedAt,
       'status': status,
+      'totalPrice': totalPrice
     };
   }
 
@@ -43,6 +46,7 @@ class Order {
       userId: map['userId'] as String,
       orderedAt: map['orderedAt'] as int,
       status: map['status'] as int,
+      totalPrice: double.parse(map['totalPrice'].toString()),
       quantity: List<int>.from(
         map['products']?.map(
           (e) => e['quantity'],

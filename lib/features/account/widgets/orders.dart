@@ -2,6 +2,7 @@ import 'package:ecommerce_app/common/loader.dart';
 import 'package:ecommerce_app/constants/global_variables.dart';
 import 'package:ecommerce_app/features/account/services/account_services.dart';
 import 'package:ecommerce_app/features/account/widgets/product.dart';
+import 'package:ecommerce_app/features/order_details/screens/order_details_screen.dart';
 import 'package:ecommerce_app/models/order.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -67,7 +68,14 @@ class _OrdersState extends State<Orders> {
                   itemCount: orders!.length,
                   itemBuilder: (context, index) {
                     // return Product(image: list[index]["image"]);
-                    return Product(image: orders![index].products[0].images[0]);
+                    return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, OrderDetailsScreen.routeName,
+                              arguments: orders![index]);
+                        },
+                        child: Product(
+                            image: orders![index].products[0].images[0]));
                   },
                 ),
               )
