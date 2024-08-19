@@ -239,7 +239,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   steps: [
                     Step(
                       title: const Text("Pending"),
-                      content: const Text("Your order is yet to be delivered"),
+                      content: Container(
+                        alignment: Alignment.topLeft,
+                        child: const Text(
+                          "Your order is yet to be delivered",
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
                       isActive: currentStep > 0,
                       state: currentStep > 0
                           ? StepState.complete
@@ -247,8 +253,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     ),
                     Step(
                       title: const Text("Completed"),
-                      content: const Text(
-                          "Your order has been delivered, yet to verified"),
+                      content: Container(
+                        alignment: Alignment.topLeft,
+                        child: const Text(
+                          "Your order has been delivered, yet to verified",
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
                       isActive: currentStep >= 1,
                       state: currentStep > 1
                           ? StepState.complete
@@ -256,8 +267,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     ),
                     Step(
                       title: const Text("Received"),
-                      content: const Text(
-                          "Your order has been delivered, yet and verified"),
+                      content: Container(
+                        alignment: Alignment.topLeft,
+                        child: const Text(
+                          "Your order has been delivered, yet and verified",
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
                       isActive: currentStep >= 2,
                       state: currentStep > 2
                           ? StepState.complete
@@ -265,8 +281,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     ),
                     Step(
                       title: const Text("Delivered"),
-                      content: const Text(
-                          "Your order has been delivered, yet and verified"),
+                      content: Container(
+                        alignment: Alignment.topLeft,
+                        child: const Text(
+                          "Your order has been delivered, yet and verified",
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
                       isActive: currentStep >= 3,
                       state: currentStep >= 3
                           ? StepState.complete

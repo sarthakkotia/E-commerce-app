@@ -85,4 +85,59 @@ adminRouter.post("/admin/change-order-status", admin, async (req, res) => {
     }
 })
 
+adminRouter.get("/admin/analytics", admin, async (req, res) => {
+try {
+    // get orders
+    const orders = await Order.find({});
+    let totalEarnings = 0
+    // go through every order and it's every product andd add the earned amount
+    // console.log(orders)
+    for(let i = 0; i<orders.length; i++){
+        const order = orders[i];
+        // console.log(order)
+        totalEarnings += order["totalPrice"]
+    }
+    //category search
+    const mobilesEarnings = await fetchCategoryWiseEarnings("Mobiles")
+    const essentialsEarnings = await fetchCategoryWiseEarnings("Essentials")
+    const appliancesEarnings = await fetchCategoryWiseEarnings("Appliances")
+    const booksEarnings = await fetchCategoryWiseEarnings("Books")
+    const fashionEarnings = await fetchCategoryWiseEarnings("Fashion")
+
+    const earnings = {
+        totalEarnings,
+        mobilesEarnings,
+        essentialsEarnings,
+        appliancesEarnings,
+        booksEarnings,
+        fashionEarnings
+    }
+    res.json({
+        earnings
+    })
+} catch (error) {
+    res.status(500).json({error: error.message})
+}
+})
+
+async function fetchCategoryWiseEarnings(category){
+    console.log(category)
+    let categoryOrders = await Order.find({
+        "products.product.category": category
+    });
+    // console.log(categoryOrders)
+    let earnings = 0
+    for(let i=0; i<categoryOrders.length; i++){
+        const order = categoryOrders[i];
+        // console.log(order)
+        const products = order.products;
+        // console.log(products)
+        for(let j=0; j<products.length; j++){
+            if(products[j].product.category == category)
+                earnings += products[j].quantity * products[j].product.price
+        }
+    }
+    return earnings;
+}
+
 module.exports = adminRouter

@@ -6,6 +6,12 @@
 - Add Example video and images
 - Reconstruct backed to support industry standards
 - Integrate MVVM model
+- Use Refresh Token to have an expiry for the access token
+- password to be hidden while entering 
+- show errors using a pop up snackbar
+- deploy backend
+- offline validation
+- improve on charts
 
 
 
