@@ -7,7 +7,6 @@ import 'package:ecommerce_app/constants/utils.dart';
 import 'package:ecommerce_app/features/address/services/address_services.dart';
 import 'package:ecommerce_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
 
@@ -82,7 +81,7 @@ class _AddressScreenState extends State<AddressScreen> {
         totalSum: double.parse(widget.totalAmount));
   }
 
-  void TestonGPayResult() {
+  void testonGPayResult() {
     if (Provider.of<UserProvider>(context, listen: false)
         .user
         .address
@@ -118,7 +117,7 @@ class _AddressScreenState extends State<AddressScreen> {
     } else {
       showSnackBar(context, "Error");
     }
-    TestonGPayResult();
+    testonGPayResult();
   }
 
   @override

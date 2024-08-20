@@ -32,7 +32,7 @@ class AddressBox extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 5, right: 5),
-              //TODO: get address when the user would click the cart icon and for the first time when entering the address we will keep track of that
+// get address when the user would click the cart icon and for the first time when entering the address we will keep track of that
               child: Text(
                 "Delivery to ${user.name} - ${user.address}",
                 style: const TextStyle(

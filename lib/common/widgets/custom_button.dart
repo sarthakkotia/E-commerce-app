@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/constants/global_variables.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -9,13 +10,17 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onTap,
-      style: ElevatedButton.styleFrom(
-          minimumSize: const Size(double.infinity, 50), backgroundColor: color),
-      child: Text(
-        text,
-        style: TextStyle(color: color == null ? Colors.white : Colors.black),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: ElevatedButton.styleFrom(
+            minimumSize: const Size(double.infinity, 50),
+            backgroundColor: color ?? GlobalVariables.secondaryColor),
+        child: Text(
+          text,
+          style: const TextStyle(color: Colors.black),
+        ),
       ),
     );
   }

@@ -33,7 +33,7 @@ class User {
     };
   }
 
-  //TODO: understand why factory pattern used
+  //TODO: understand why factory pattern used for json serialzation
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(

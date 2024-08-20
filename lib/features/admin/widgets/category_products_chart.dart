@@ -40,8 +40,7 @@ class CategoryProductsChart extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           drawBelowEverything: true,
-          sideTitles: SideTitles(
-              showTitles: true, reservedSize: 30, getTitlesWidget: getTitles)),
+          sideTitles: SideTitles(showTitles: true, getTitlesWidget: getTitles)),
       leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
       topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
       rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),

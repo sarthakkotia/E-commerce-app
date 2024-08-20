@@ -2,7 +2,6 @@ import 'package:ecommerce_app/common/loader.dart';
 import 'package:ecommerce_app/features/admin/models/sales.dart';
 import 'package:ecommerce_app/features/admin/services/admin_services.dart';
 import 'package:ecommerce_app/features/admin/widgets/category_products_chart.dart';
-import 'package:ecommerce_app/features/admin/widgets/sample_bar_chart.dart';
 import 'package:flutter/material.dart';
 
 class AnalyticsScreen extends StatefulWidget {
@@ -46,7 +45,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 height: 50,
               ),
               SizedBox(
-                height: 250,
+                height: 300,
                 child: CategoryProductsChart(
                   seriesList: earnings!,
                 ),

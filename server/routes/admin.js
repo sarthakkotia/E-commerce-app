@@ -121,7 +121,7 @@ try {
 })
 
 async function fetchCategoryWiseEarnings(category){
-    console.log(category)
+    // console.log(category)
     let categoryOrders = await Order.find({
         "products.product.category": category
     });

@@ -12,6 +12,7 @@
 - deploy backend
 - offline validation
 - improve on charts
+- revamp UI if found better
 
 
 

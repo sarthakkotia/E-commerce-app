@@ -3,7 +3,7 @@ import 'package:ecommerce_app/features/admin/screens/add_product_screen.dart';
 import 'package:ecommerce_app/features/admin/services/admin_services.dart';
 import 'package:ecommerce_app/models/product.dart';
 import 'package:ecommerce_app/features/account/widgets/product.dart'
-    as SingleProduct;
+    as single_product;
 import 'package:flutter/material.dart';
 
 class ProductsScreen extends StatefulWidget {
@@ -56,7 +56,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   children: [
                     SizedBox(
                       height: 140,
-                      child: SingleProduct.Product(
+                      child: single_product.Product(
                         image: productData.images[0],
                       ),
                     ),

@@ -11,7 +11,6 @@ import 'package:ecommerce_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import "package:http/http.dart" as http;
-import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 class AdminServices {
