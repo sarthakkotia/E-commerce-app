@@ -13,6 +13,7 @@
 - offline validation
 - improve on charts
 - revamp UI if found better
+- change the default icon
 
 
 
