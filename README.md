@@ -2,7 +2,6 @@
 
 ## TODO
 - Change readme for project introduction
-- Continue work for MVP completion -> Order models
 - Add Example video and images
 - Reconstruct backed to support industry standards
 - Integrate MVVM model
@@ -14,6 +13,7 @@
 - improve on charts
 - revamp UI if found better
 - change the default icon
+- document the code
 
 
 
