@@ -2,7 +2,6 @@
 
 ## TODO
 - Change readme for project introduction
-- Continue work for MVP completion -> Order models
 - Add Example video and images
 - Reconstruct backed to support industry standards
 - Integrate MVVM model
@@ -15,6 +14,7 @@
 - revamp UI if found better
 - change the default icon
 - provide a link for the app to be downloaded as APK
+
 
 
 
