@@ -13,7 +13,7 @@
 - improve on charts
 - revamp UI if found better
 - change the default icon
-- document the code
+- provide a link for the app to be downloaded as APK
 
 
 
