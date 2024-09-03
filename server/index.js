@@ -1,5 +1,6 @@
 // console.log("Hello, World!")
 // Packages
+require("dotenv").config()
 const express = require('express');
 const mongoose = require('mongoose');
 // from files
@@ -11,7 +12,7 @@ const userRouter = require('./routes/user.js');
 
 // Initalization
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const DB = "mongodb+srv://admin:admin@cluster0.vgqvht2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 // middleware
 app.use(express.json())
