@@ -12,10 +12,20 @@ dotenv.config({
 // const productRouter = require('./routes/product.js');
 // const userRouter = require('./routes/user.js');
 import { connectDB } from "./db/db_connect.js";
+import { app } from "./app.js";
 
-
-connectDB()
+// sets up a listener for application errors
+app.on("error", (err) => {
+  console.log(`error occurred: ${err}`)
+})
 const PORT = process.env.PORT || 3000;
+connectDB().then(
+  app.listen(PORT, () => {
+    console.log(`⚙️ Server listening on port: ${PORT} ⚙️`)
+  })
+).catch((err) => {
+  console.log("connection failed: ", err)
+})
 
 
 
