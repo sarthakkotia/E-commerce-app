@@ -19,6 +19,7 @@ app.on("error", (err) => {
   console.log(`error occurred: ${err}`)
 })
 const PORT = process.env.PORT || 3000;
+
 connectDB().then(
   app.listen(PORT, () => {
     console.log(`⚙️ Server listening on port: ${PORT} ⚙️`)
