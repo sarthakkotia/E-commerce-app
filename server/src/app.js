@@ -1,5 +1,5 @@
 import express from "express";
-
+import userRouter from "./routes/user.routes.js";
 const app = express()
 
 // this acts as a body parser for json ie accepting json data
@@ -14,5 +14,8 @@ app.use(express.urlencoded({
     extended: true,
     limit: '16kb'
 }))
+
+
+app.use("/api/user",userRouter)
 
 export {app}
